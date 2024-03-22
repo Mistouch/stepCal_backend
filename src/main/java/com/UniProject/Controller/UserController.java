@@ -101,9 +101,9 @@ public class UserController {
     */
 
     @GetMapping("/leaderboard")
-    public ResponseEntity<List<Map<String, Object>>> getLeaderboard() {
+    public ResponseEntity<List<UserDto>> getLeaderboard() {
 
-        List<Map<String, Object>> leaderboard = userService.getLeaderboard();
+        List<UserDto> leaderboard = userService.getLeaderboard();
         return ResponseEntity.ok(leaderboard);
     }
 

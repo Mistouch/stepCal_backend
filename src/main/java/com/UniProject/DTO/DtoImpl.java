@@ -36,6 +36,7 @@ public class DtoImpl {
         userDto.setGoal(user.getGoal());
         userDto.setWeight(user.getWeight());
         userDto.setActivity_level(user.getActivity_level());
+        userDto.setPoint(user.getPoint());
         return userDto;
     }
 }

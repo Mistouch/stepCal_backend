@@ -278,21 +278,19 @@ public class UserService {
     /**
      * Creating the LeaderBord
      */
-    public List<Map<String, Object>> getLeaderboard() {
-        List<Map<String, Object>> leaderboard = new ArrayList<>();
-        for (User user : userRepository.findAll()) {
-            Map<String, Object> userMap = new HashMap<>();
-            userMap.put("name", user.getFirst_name());
-            userMap.put("points", user.getPoint());
-            leaderboard.add(userMap);
+    public List<UserDto> getLeaderboard() {
+        List<UserDto>leaderboard=new ArrayList<>();
+        List<User>users= (List<User>) userRepository.findAll();
+        for(User user:users){
+            leaderboard.add(dto.convertUserToUserDto(user));
         }
-        Collections.sort(leaderboard, new Comparator<Map<String, Object>>() {
+        leaderboard.sort(new Comparator<UserDto>() {
             @Override
-            public int compare(Map<String, Object> user1, Map<String, Object> user2) {
-                // Compare points in descending order
-                return Integer.compare((int) user2.get("points"), (int) user1.get("points"));
+            public int compare(UserDto user1, UserDto user2) {
+                return Integer.compare(user2.getPoint(), user1.getPoint());
             }
         });
+
         return leaderboard;
     }
 
